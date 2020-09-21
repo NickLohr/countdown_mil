@@ -4,6 +4,7 @@
 <h2 style="text-align: center;border: 3px solid black" id="seconds"></h2>
 <h2 style="text-align: center;border: 3px solid black" id="procent"></h2>
 <h2 style="text-align: center;border: 3px solid black" id="money"></h2>
+<h2 style="text-align: center;border: 3px solid black" id="workdays"></h2>
 
 <script>
 // Set the date we're counting down to
@@ -20,6 +21,8 @@ var x = setInterval(function() {;
   var distance = countDownDate - now;
   var done_time = now-startDate;
   var total_time = countDownDate-startDate;
+  var day =new Date().getDay();
+  
 
   // Time calculations for days, hours, minutes and seconds
   var days = Math.floor(distance / (1000 * 60 * 60 * 24));
@@ -34,6 +37,8 @@ var x = setInterval(function() {;
   document.getElementById("seconds").innerHTML = Math.floor(distance/1000) + "s ";
   document.getElementById("money").innerHTML = Math.floor((((done_time/1000)*62)/36)/24)/100 + "CHFr ";
   document.getElementById("procent").innerHTML = Math.floor(done_time/total_time*10000)/100+"%";
+  document.getElementById("workdays").innerHTML =(days+day-2)/7*5  + " Arbeitstage"
+
 
 
   // If the count down is finished, write some text
