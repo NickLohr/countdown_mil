@@ -1,54 +1,98 @@
 <html>
-<!-- Display the countdown timer in an element -->
-<h2 style="text-align: center;border: 3px solid black" id="nice-time"></h2>
-<h2 style="text-align: center;border: 3px solid black" id="seconds"></h2>
-<h2 style="text-align: center;border: 3px solid black" id="procent"></h2>
-<h2 style="text-align: center;border: 3px solid black" id="money"></h2>
-<h2 style="text-align: center;border: 3px solid black" id="workdays"></h2>
+	<head>
+		<title>Countdown</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+		<style>
+			* {
+				font-family: "Arial Black", Gadget, sans-serif;
+				box-sizing: border-box;
+				padding: 0;
+				margin: 0;
+				color: white;
+			}
+			
+			:root {
+				background-color: black;
+				font-size: 12pt;
+			}
+			
+			#stats {
+				margin: auto;
+				padding: 20px;
+			}
+			
+			p {
+				font-size: 1.5rem;
+				text-align: center;
+				padding: 5px;
+			}
+			
+			/* Prgress bar */
+			.progress {
+				width: 100%;
+				background-color: #333333;
+			}
 
-<script>
-// Set the date we're counting down to
-var countDownDate = new Date("Apr 21, 2021 17:00:00").getTime();
-var startDate = new Date("Jun 29, 2020 8:00:00").getTime();
+			#overall {
+				text-align: right;
+				padding: 5px 10px;
+				background-color: green;
+				width: 0%;
+			}
+		</style>
+		<script>
+			// Set the date we're counting down to
+			var countDownDate = new Date("Apr 21, 2021 17:00:00").getTime();
+			var startDate = new Date("Jun 29, 2020 8:00:00").getTime();
 
-// Update the count down every 1 second
-var x = setInterval(function() {;
-
-  // Get today's date and time
-  var now = new Date().getTime();
-
-  // Find the distance between now and the count down date
-  var distance = countDownDate - now;
-  var done_time = now-startDate;
-  var total_time = countDownDate-startDate;
-  var day =new Date().getDay();
-  
-
-  // Time calculations for days, hours, minutes and seconds
-  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-  // Display the result in the element with id="demo"
-  document.getElementById("nice-time").innerHTML = days + "d " + hours + "h "
-  + minutes + "m " + seconds + "s ";
-
-  document.getElementById("seconds").innerHTML = Math.floor(distance/1000) + "s ";
-  document.getElementById("money").innerHTML = Math.floor((((done_time/1000)*62)/36)/24)/100 + "CHFr ";
-  document.getElementById("procent").innerHTML = Math.floor(done_time/total_time*10000)/100+"%";
-  document.getElementById("workdays").innerHTML =(days+day-2)/7*5  + " Arbeitstage"
-
-
-
-  // If the count down is finished, write some text
-  if (distance < 0) {
-    clearInterval(x);
-    document.getElementById("time").innerHTML = "EXPIRED";
-    document.getElementById("time").innerHTML = "EXPIRED";
-    document.getElementById("time").innerHTML = "EXPIRED";
-    document.getElementById("time").innerHTML = "EXPIRED";
-  }
-}, 100);
-</script>
+			// Update the count down every 1 second
+			var x = setInterval(function() {;
+				
+				// Get today's date and time
+				var now = new Date().getTime();
+				
+				// Find the distance between now and the count down date
+				var distance = countDownDate - now;
+				var done_time = now-startDate;
+				var total_time = countDownDate-startDate;
+				var day =new Date().getDay();
+				
+				// Time calculations for days, hours, minutes and seconds
+				var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+				var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+				var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+				var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+				
+				// Display the result in the element with id="demo"
+				document.getElementById("nice-time").innerHTML = days + "d " + hours + "h "	+ minutes + "m " + seconds + "s ";
+				document.getElementById("seconds").innerHTML = (Math.floor(distance/1000)).toLocaleString("de-CH") + "s ";
+				document.getElementById("money").innerHTML = "CHF " + Math.floor((((done_time/1000)*62)/36)/24)/100;
+				document.getElementById("workdays").innerHTML =(days+day-2)/7*5 + " Arbeitstage"
+				document.getElementById("overall").innerHTML = Math.floor(done_time/total_time*10000)/100+"%";
+				document.getElementById("overall").style.width = Math.floor(done_time/total_time*10000)/100+"%";
+				
+				// If the count down is finished, write some text
+				if (distance < 0) {
+					clearInterval(x);
+					document.getElementById("nice-time").innerHTML = "Done";
+					document.getElementById("seconds").innerHTML = "Done";
+					document.getElementById("money").innerHTML = "Done";
+					document.getElementById("workdays").innerHTML = "Done";
+					document.getElementById("overall").innerHTML = "100%";
+				}
+			}, 100);
+		</script>
+	</head>
+	<body>
+		<!-- Display the countdown timer in an element -->
+		<div class="progress">
+			<div id="overall"></div>
+		</div>
+		<div id="stats">
+			<p id="nice-time">JavaScript not enabled!</p>
+			<p id="seconds">JavaScript not enabled!</p>
+			<p id="money">JavaScript not enabled!</p>
+			<p id="workdays">JavaScript not enabled!</p>
+		</div>
+	</body>
 </html>
