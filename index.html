@@ -67,7 +67,7 @@
 				document.getElementById("nice-time").innerHTML = days + "d " + hours + "h "	+ minutes + "m " + seconds + "s ";
 				document.getElementById("seconds").innerHTML = (Math.floor(distance/1000)).toLocaleString("de-CH") + "s ";
 				document.getElementById("money").innerHTML = "CHF " + Math.floor((((done_time/1000)*62)/36)/24)/100;
-				document.getElementById("workdays").innerHTML =(days+day-2)/7*5 + " Arbeitstage"
+				document.getElementById("workdays").innerHTML =Math.floor((days)/7*5)+2 + " Arbeitstage"
 				document.getElementById("overall").innerHTML = Math.floor(done_time/total_time*10000)/100+"%";
 				document.getElementById("overall").style.width = Math.floor(done_time/total_time*10000)/100+"%";
 				
